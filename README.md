@@ -1,6 +1,6 @@
 # Link 👇👇👇👇
 
-[Deploy Link]()
+[Deploy Link](https://gettodoitem.netlify.app/)
 
 **This is the Todo app. Built using React and Material UI. I used uuid to make each item unique. You can delete your to-do and click info button to get complete to-do**
 
