@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Grid, IconButton, Paper, Stack, Typography } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,17 +7,26 @@ import "react-toastify/dist/ReactToastify.css";
 import InfoIcon from "@mui/icons-material/Info";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Info from "./Info";
+import { TodoContext } from "./context/TodoContext";
+import { getItems, removeItem } from "./helper";
 
-const MuiCard = ({ todos, setRemove = (f) => f }) => {
+const MuiCard = () => {
+  const { click, setClick } = useContext(TodoContext);
+  const [todos, setTodos] = useState();
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(!open);
   };
 
   const isDelete = (id) => {
-    setRemove(id);
     toast.success("Item remove", { theme: "dark", autoClose: 1000 });
+    removeItem(id);
+    setClick(!click);
   };
+
+  useEffect(() => {
+    setTodos(getItems());
+  }, [click]);
 
   return (
     <>

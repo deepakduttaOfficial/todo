@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Container, Paper, TextField, Typography } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MuiCard from "./MuiCard";
 
+import { setItem } from "./helper/index";
+
 // Generate unique id
 import { v4 as uuidv4 } from "uuid";
+import { TodoContext } from "./context/TodoContext";
 
 const Main = () => {
-  const [todos, setTodos] = useState([]);
-  const [remove, setRemove] = useState();
+  const { click, setClick } = useContext(TodoContext);
   const [values, setValues] = useState({
     id: "",
     title: "",
     description: "",
   });
-
   const { title, description } = values;
   const handleChange = (name) => (e) => {
     setValues({ ...values, [name]: e.target.value });
@@ -26,17 +27,15 @@ const Main = () => {
       toast.error("All field are required", { theme: "dark", autoClose: 1000 });
       return;
     }
-    setTodos([...todos, { id: uuidv4(), title, description }]);
+    let allTodos = { id: uuidv4(), title, description };
+    setItem(allTodos);
+    setClick(!click);
     setValues({
       title: "",
       description: "",
     });
     toast.success("You create a todo", { theme: "dark", autoClose: 1000 });
   };
-
-  useEffect(() => {
-    setTodos(todos.filter((item) => item.id !== remove));
-  }, [remove]);
 
   return (
     <div>
@@ -86,7 +85,7 @@ const Main = () => {
           </Paper>
         </Container>
 
-        <MuiCard todos={todos} setRemove={setRemove} />
+        <MuiCard />
       </Container>
     </div>
   );
