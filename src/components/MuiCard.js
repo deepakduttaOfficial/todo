@@ -4,9 +4,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 //icon
-import InfoIcon from "@mui/icons-material/Info";
+// import InfoIcon from "@mui/icons-material/Info";
+// import Info from "./Info";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Info from "./Info";
 import { TodoContext } from "./context/TodoContext";
 import { getItems, removeItem } from "./helper";
 
@@ -14,7 +14,8 @@ const MuiCard = () => {
   const { click, setClick } = useContext(TodoContext);
   const [todos, setTodos] = useState();
   const [open, setOpen] = useState(false);
-  const handleOpen = () => {
+
+  const handleOpen = (todoId) => {
     setOpen(!open);
   };
 
@@ -57,15 +58,13 @@ const MuiCard = () => {
                   justifyContent={"end"}
                   mt={"-2rem"}
                 >
-                  <IconButton color="info" onClick={handleOpen}>
-                    <Info
-                      open={open}
-                      setOpen={setOpen}
-                      todos={todos}
-                      todoId={todo.id}
-                    />
+                  {/* <IconButton
+                    color="info"
+                    onClick={handleOpen}
+                  >
+                    <Info open={open} setOpen={setOpen} todoId={todo.id} index={index}/>
                     <InfoIcon />
-                  </IconButton>
+                  </IconButton> */}
                   <IconButton
                     color="warning"
                     onClick={() => {

@@ -11,10 +11,30 @@ import { v4 as uuidv4 } from "uuid";
 import { TodoContext } from "./context/TodoContext";
 
 const Main = () => {
+  // Not compalsury
+  const month = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const d = new Date();
+  let monthName = month[d.getMonth()];
+  let dayName = d.getDay();
+
   const { click, setClick } = useContext(TodoContext);
   const [values, setValues] = useState({
     id: "",
-    title: "",
+    title: `${dayName}, ${monthName}`,
     description: "",
   });
   const { title, description } = values;
@@ -31,7 +51,7 @@ const Main = () => {
     setItem(allTodos);
     setClick(!click);
     setValues({
-      title: "",
+      title: `${dayName}, ${monthName}`,
       description: "",
     });
     toast.success("You create a todo", { theme: "dark", autoClose: 1000 });

@@ -1,7 +1,8 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { getItems } from "./helper";
 
 const style = {
   position: "absolute",
@@ -15,14 +16,19 @@ const style = {
   borderRadius: "10px",
 };
 
-export default function Info({ open, setOpen = (f) => f, todos, todoId }) {
+export default function Info({ open, setOpen = (f) => f, todoId, index }) {
   const handleClose = () => {
     setOpen(!open);
   };
-  var result = todos.find(function (todo) {
-    return todo.id === todoId;
+
+  var result = getItems().map((e) => {
+    if (e.id === todoId) {
+      return e;
+    }
   });
+  console.log(index);
   const { title, description } = result;
+
   return (
     <div>
       <Modal open={open} onClose={handleClose}>
