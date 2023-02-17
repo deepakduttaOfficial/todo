@@ -1,9 +1,9 @@
 import React from "react";
 import { Card, IconButton, Stack, Typography } from "@mui/material";
 // Icons
-
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 // Custom style
 import { cardStyle } from "./style";
@@ -23,11 +23,24 @@ const TodoCard = ({ todo, setTodoUpdate }) => {
   };
   return (
     <Card sx={cardStyle}>
-      <Typography variant="h5" ml="10px">
+      <Typography variant="h5" ml="10px" sx={{ overflow: "hidden" }}>
         {todo?.todo || todo?.description}
       </Typography>
       <Stack direction={"row"}>
-        <IconButton>
+        <IconButton
+          onClick={() => {
+            window.navigator.clipboard.writeText(
+              todo?.todo || todo?.description
+            );
+            toast.success("Copied", {
+              theme: "dark",
+              autoClose: 1000,
+            });
+          }}
+        >
+          <ContentCopyIcon sx={{ color: "#42a5f5" }} />
+        </IconButton>
+        <IconButton disabled>
           <EditIcon sx={{ color: "#42a5f5" }} />
         </IconButton>
         <IconButton

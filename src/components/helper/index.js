@@ -1,12 +1,10 @@
 export const setItem = (todoItem) => {
   let todos = [];
-  if (typeof window !== undefined) {
-    if (localStorage.getItem("todos")) {
-      todos = JSON.parse(localStorage.getItem("todos"));
-    }
-    todos.push(todoItem);
-    localStorage.setItem("todos", JSON.stringify(todos));
+  if (localStorage.getItem("todos")) {
+    todos = JSON.parse(localStorage.getItem("todos"));
   }
+  todos.push(todoItem);
+  localStorage.setItem("todos", JSON.stringify(todos));
 };
 
 export const getItems = () => {
@@ -23,7 +21,7 @@ export const removeItem = (id) => {
     if (localStorage.getItem("todos")) {
       todos = JSON.parse(localStorage.getItem("todos"));
     }
-    todos.map((todoItem, index) => {
+    todos.forEach((todoItem, index) => {
       if (todoItem.id === id) {
         todos.splice(index, 1);
       }

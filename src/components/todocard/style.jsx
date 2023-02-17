@@ -3,4 +3,5 @@ export const cardStyle = {
   alignItems: "center",
   padding: "10px",
   justifyContent: "space-between",
+  overFlow: "hidden",
 };
