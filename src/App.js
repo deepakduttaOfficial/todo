@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { ThemeProvider } from "@mui/material";
 import "./App.css";
-import { TodoContext } from "./components/context/TodoContext";
-import Main from "./components/Main";
+import theme from "./theme";
+import TodoHome from "./pages";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
-  const [click, setClick] = useState(false);
   return (
-    <TodoContext.Provider value={{ click, setClick }}>
-      <Main />
-    </TodoContext.Provider>
+    <ThemeProvider theme={theme}>
+      <ToastContainer />
+      <TodoHome />
+    </ThemeProvider>
   );
 };
 
